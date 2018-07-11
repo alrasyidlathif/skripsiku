@@ -1,22 +1,4 @@
-def popinit(popsize, klusmin, klusmax):
-# inisialisasi populasi (kumpulan solusi)
-    global idvdke
-    global minx
-    global maxx
-    global miny
-    global maxy
-    pop = []
-    for k in range(klusmin, klusmax+1):
-        for i in range(int(popsize/(klusmax+1 - klusmin))):
-            ss = [-10]
-            for j in range(k):
-                ss.append([ngerandom(minx-1, maxx+1), ngerandom(miny-1, maxy+1)])
-            idvdke = idvdke + 1
-            ss.append('ke-' + str(idvdke))
-            ss.append('random')
-            pop.append(ss)
-    return pop
-
+import random
 
 def selection(pop, popsize):
 #selection

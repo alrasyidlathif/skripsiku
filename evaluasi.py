@@ -1,3 +1,5 @@
+import copy
+
 def km(individu, titik):
 # evaluation (kmeans)
     centroid = copy.deepcopy(individu)
