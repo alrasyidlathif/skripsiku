@@ -7,6 +7,7 @@ import matplotlib.pyplot as plt
 import datasets
 import popfunction
 import evaluasi
+import otherfunction
 
 
 def ngerandom(minval, maxval):
@@ -113,7 +114,7 @@ klusmin = 2
 klusmax = 8
 injek = klusmax - klusmin + 1
 
-maxiter = 10
+maxiter = 100
 popsize = int((math.floor(popsize/(klusmax+1 - klusmin))) * (klusmax+1 - klusmin))
 iter = 1
 
@@ -141,6 +142,7 @@ maxy = math.ceil(max(y))
 
 #inisialisasi pop awal
 pop = popinit(popsize, klusmin, klusmax)
+
 
 elitism_box = [-10]
 restarts_box = []
@@ -188,17 +190,22 @@ while ( iter <= maxiter ):
     pop.insert(0, idvd_terbaik)
 
 
-    pop.sort()
-    pop.reverse()
-    if elitism_box[0] <= pop[0][0]:
-        if elitism_box[0] < pop[0][0]:
-            elitism_box = copy.deepcopy(pop[0])
+    pop, bre, elitism_box, restarts_box, break_box = otherfunction.breaker(pop, popinit, popsize, klusmin, klusmax, elitism_box, restarts_box, break_box)
+    if bre == 1:
+        break
+
+
+    #RECHENBERG
+    fitness_t, fitness_tmin1, mutation_rate, rech_score = otherfunction.rech(fitness_t, fitness_tmin1, elitism_box, iter, mutation_rate, rech_score)
 
 
     iter = iter + 1
 
 print(" ")
 print("========== ITERASI DIHENTIKAN ==========")
+print(" ")
+print("Iterasi: ")
+print(iter)
 print(" ")
 print("Individu Terbaik: ")
 print(elitism_box)
