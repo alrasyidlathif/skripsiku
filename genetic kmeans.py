@@ -157,6 +157,15 @@ rech_score = []
 print(popsize)
 input('lanjut: ')
 while ( iter <= maxiter ):
+    
+
+    # INJEK POP
+    tambahpop = []
+    if math.fmod(iter, 20) == 0: # insert random individu setiap 20 iterasi
+        # input('syarat terpenuhi, maka akan dilakukan random injection..')
+        tambahpop = popinit(injek, klusmin, klusmax)
+        for i in tambahpop:
+            pop.append(i)
 
 
     # REPRODUKSI
@@ -190,12 +199,13 @@ while ( iter <= maxiter ):
     pop.insert(0, idvd_terbaik)
 
 
+    # BREAKER
     pop, bre, elitism_box, restarts_box, break_box = otherfunction.breaker(pop, popinit, popsize, klusmin, klusmax, elitism_box, restarts_box, break_box)
     if bre == 1:
         break
 
 
-    #RECHENBERG
+    # RECHENBERG
     fitness_t, fitness_tmin1, mutation_rate, rech_score = otherfunction.rech(fitness_t, fitness_tmin1, elitism_box, iter, mutation_rate, rech_score)
 
 
